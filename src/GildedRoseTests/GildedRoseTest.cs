@@ -47,6 +47,27 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+
+    /// <summary>
+    /// The Quality of an item is never negative
+    /// </summary>
+    [Theory]
+    [InlineData(1)]
+    [InlineData(0)]
+    public void UpdateQuality_ShouldNotDecreaseQualityToNegative_GivenAnItemWithOneOrZeroQuality(int quality)
+    {
+        // Given the item has a quality value of 0 or 1
+        Item item = CreateItem("Test", sellIn: 10, quality);
+        GildedRose sut = CreateGuildedRose(item);
+        int expectedQuality = 0;
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then the quality value is never negative
+        Assert.Equal(expectedQuality, item.Quality);
+    }
+
     private static Item CreateItem(string name, int sellIn, int quality)
         => new() { Name = name, SellIn = sellIn, Quality = quality };
 
