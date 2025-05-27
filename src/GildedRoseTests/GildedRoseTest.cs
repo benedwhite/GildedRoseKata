@@ -14,13 +14,8 @@ public class GildedRoseTest
     public void UpdateQuality_ShouldDecreaseSellInAndQualityByOne_GivenNormalItem()
     {
         // Given the item has a sell in value of 10 and a quality value of 20
-        Item item = new()
-        {
-            Name = "Test Item",
-            SellIn = 10,
-            Quality = 20
-        };
-        GildedRose sut = new([item]);
+        Item item = CreateItem("Test Item", 10, quality: 20);
+        GildedRose sut = CreateGuildedRose(item);
 
         // When UpdateQuality is invoked
         sut.UpdateQuality();
@@ -39,13 +34,8 @@ public class GildedRoseTest
     public void UpdateQuality_ShouldDecreaseQualityByTwo_GivenAnItemWithZeroOrNegativeSellIn(int sellIn)
     {
         // Given the item sell by date has passed (0 or negative)
-        Item item = new()
-        {
-            Name = "Test Item",
-            SellIn = sellIn,
-            Quality = 20
-        };
-        GildedRose sut = new([item]);
+        Item item = CreateItem("Test Item", sellIn, quality: 20);
+        GildedRose sut = CreateGuildedRose(item);
 
         // When UpdateQuality is invoked
         sut.UpdateQuality();
@@ -53,4 +43,9 @@ public class GildedRoseTest
         // Then the quality degrades twice as fast
         Assert.Equal(18, item.Quality);
     }
+
+    private static Item CreateItem(string name, int sellIn, int quality)
+        => new() { Name = name, SellIn = sellIn, Quality = quality };
+
+    private static GildedRose CreateGuildedRose(Item item) => new([item]);
 }
