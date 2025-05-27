@@ -29,4 +29,28 @@ public class GildedRoseTest
         Assert.Equal(9, item.SellIn);
         Assert.Equal(19, item.Quality);
     }
+
+    /// <summary>
+    /// Once the sell by date has passed, Quality degrades twice as fast
+    /// </summary>
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void UpdateQuality_ShouldDecreaseQualityByTwo_GivenAnItemWithZeroOrNegativeSellIn(int sellIn)
+    {
+        // Given the item sell by date has passed (0 or negative)
+        Item item = new()
+        {
+            Name = "Test Item",
+            SellIn = sellIn,
+            Quality = 20
+        };
+        GildedRose sut = new([item]);
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then the quality degrades twice as fast
+        Assert.Equal(18, item.Quality);
+    }
 }
