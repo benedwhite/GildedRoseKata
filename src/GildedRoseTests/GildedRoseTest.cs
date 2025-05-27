@@ -130,9 +130,9 @@ public class GildedRoseTest
     [Theory]
     [InlineData(100)]
     [InlineData(11)]
-    public void UpdateQuality_ShouldIncreaseQualityByOne_GivenABackstagePassItemWithQualityGreaterThan10(int sellIn)
+    public void UpdateQuality_ShouldIncreaseQualityByOne_GivenABackstagePassItemWithSellInGreaterThan10(int sellIn)
     {
-        // Given a "Backstage passes" item with a quality value over 10
+        // Given a "Backstage passes" item with a sellIn value over 10
         Item item = CreateItem(
             "Backstage passes to a TAFKAL80ETC concert",
             sellIn,
@@ -154,9 +154,9 @@ public class GildedRoseTest
     [Theory]
     [InlineData(10)]
     [InlineData(6)]
-    public void UpdateQuality_ShouldIncreaseQualityByTwo_GivenABackstagePassItemWithQualityBetween5And10Inclusive(int sellIn)
+    public void UpdateQuality_ShouldIncreaseQualityByTwo_GivenABackstagePassItemWithSellInBetween5And10Inclusive(int sellIn)
     {
-        // Given a "Backstage passes" item with quality between 6 and 10 inclusive
+        // Given a "Backstage passes" item with sellIn between 6 and 10 inclusive
         Item item = CreateItem(
             "Backstage passes to a TAFKAL80ETC concert",
             sellIn,
@@ -178,9 +178,9 @@ public class GildedRoseTest
     [Theory]
     [InlineData(5)]
     [InlineData(1)]
-    public void UpdateQuality_ShouldIncreaseQualityByThree_GivenABackstagePassItemWithQualityBetween1And5Inclusive(int sellIn)
+    public void UpdateQuality_ShouldIncreaseQualityByThree_GivenABackstagePassItemWithSellInBetween1And5Inclusive(int sellIn)
     {
-        // Given a "Backstage passes" item with quality between 1 and 5 inclusive
+        // Given a "Backstage passes" item with sellIn between 1 and 5 inclusive
         Item item = CreateItem(
             "Backstage passes to a TAFKAL80ETC concert",
             sellIn,
@@ -192,6 +192,28 @@ public class GildedRoseTest
         sut.UpdateQuality();
 
         // Then the quality value increases by three
+        Assert.Equal(expectedQuality, item.Quality);
+    }
+
+    /// <summary>
+    /// "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+    /// Quality drops to 0 after the concert
+    /// </summary>
+    [Fact]
+    public void UpdateQuality_ShouldSetQualityToZero_GivenABackstagePassItemWithSellInValueAsZero()
+    {
+        // Given a "Backstage passes" item with sellIn of 0
+        Item item = CreateItem(
+            "Backstage passes to a TAFKAL80ETC concert",
+            sellIn: 0,
+            quality: 20);
+        GildedRose sut = CreateGuildedRose(item);
+        int expectedQuality = 0;
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then the quality value is set to zero
         Assert.Equal(expectedQuality, item.Quality);
     }
 
