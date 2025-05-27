@@ -106,6 +106,23 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+    /// <summary>
+    /// "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+    /// </summary>
+    [Fact]
+    public void UpdateQuality_ShouldNotIncreaseQuality_GivenAnItemThatIsSulfuras()
+    {
+        // Given a "Sulfuras" item with a quality value of 80
+        Item item = CreateItem("Sulfuras, Hand of Ragnaros", sellIn: 10, quality: 80);
+        GildedRose sut = CreateGuildedRose(item);
+        int expectedQuality = 80;
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then quality does not change
+        Assert.Equal(expectedQuality, item.Quality);
+    }
 
     private static Item CreateItem(string name, int sellIn, int quality)
         => new() { Name = name, SellIn = sellIn, Quality = quality };
