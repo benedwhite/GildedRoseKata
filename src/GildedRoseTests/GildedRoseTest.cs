@@ -2,13 +2,16 @@
 
 namespace GildedRoseTests;
 
+/// <summary>
+/// Acceptance tests for the Gilded Rose Kata.
+/// </summary>
 public class GildedRoseTest
 {
     /// <summary>
     /// At the end of each day our system lowers both values for every item
     /// </summary>
     [Fact]
-    public void UpdateQuality_DecreasesSellInAndQualityByOne_ForNormalItem()
+    public void UpdateQuality_ShouldDecreaseSellInAndQualityByOne_GivenNormalItem()
     {
         // Given the item has a sell in value of 10 and a quality value of 20
         Item item = new()
