@@ -86,6 +86,27 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+    /// <summary>
+    /// The Quality of an item is never more than 50
+    /// </summary>
+    [Theory]
+    [InlineData(49)]
+    [InlineData(50)]
+    public void UpdateQuality_ShouldNotIncreaseQualityToBeyond50_GivenAnItemWithAQualityOf49Or50(int quality)
+    {
+        // Given the item has a quality value of 49 or 50
+        Item item = CreateItem("Aged Brie", sellIn: 10, quality);
+        GildedRose sut = CreateGuildedRose(item);
+        int expectedQuality = 50;
+
+        // When UpdateQuality is invoked and increases quality
+        sut.UpdateQuality();
+
+        // Then the quality value is more than 50
+        Assert.Equal(expectedQuality, item.Quality);
+    }
+
+
     private static Item CreateItem(string name, int sellIn, int quality)
         => new() { Name = name, SellIn = sellIn, Quality = quality };
 
