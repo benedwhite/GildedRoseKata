@@ -68,6 +68,24 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+    /// <summary>
+    /// "Aged Brie" actually increases in Quality the older it gets
+    /// </summary>
+    [Fact]
+    public void UpdateQuality_ShouldIncreaseQualityByOne_GivenAnAgedBrieItem()
+    {
+        // Given
+        Item item = CreateItem("Aged Brie", sellIn: 10, quality: 1);
+        GildedRose sut = CreateGuildedRose(item);
+        int expectedQuality = 2;
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then the quality value is never negative
+        Assert.Equal(expectedQuality, item.Quality);
+    }
+
     private static Item CreateItem(string name, int sellIn, int quality)
         => new() { Name = name, SellIn = sellIn, Quality = quality };
 
