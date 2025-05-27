@@ -74,7 +74,7 @@ public class GildedRoseTest
     [Fact]
     public void UpdateQuality_ShouldIncreaseQualityByOne_GivenAnAgedBrieItem()
     {
-        // Given
+        // Given the item is "Aged Brie" with a quality value of 1
         Item item = CreateItem("Aged Brie", sellIn: 10, quality: 1);
         GildedRose sut = CreateGuildedRose(item);
         int expectedQuality = 2;
@@ -82,7 +82,7 @@ public class GildedRoseTest
         // When UpdateQuality is invoked
         sut.UpdateQuality();
 
-        // Then the quality value is never negative
+        // Then the quality value increases by one
         Assert.Equal(expectedQuality, item.Quality);
     }
 
