@@ -147,6 +147,30 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+    /// <summary>
+    /// "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+    /// Quality increases by 2 when there are 10 days or less (but no less than 6)
+    /// </summary>
+    [Theory]
+    [InlineData(10)]
+    [InlineData(6)]
+    public void UpdateQuality_ShouldIncreaseQualityByTwo_GivenABackstagePassItemWithQualityBetween5And10Inclusive(int sellIn)
+    {
+        // Given a "Backstage passes" item with a quality value over 10
+        Item item = CreateItem(
+            "Backstage passes to a TAFKAL80ETC concert",
+            sellIn,
+            quality: 20);
+        GildedRose sut = CreateGuildedRose(item);
+        int expectedQuality = 22;
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then the quality value increases by one
+        Assert.Equal(expectedQuality, item.Quality);
+    }
+
     private static Item CreateItem(string name, int sellIn, int quality)
         => new() { Name = name, SellIn = sellIn, Quality = quality };
 
