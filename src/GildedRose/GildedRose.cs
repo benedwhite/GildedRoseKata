@@ -1,16 +1,12 @@
 ﻿namespace GildedRoseKata;
 
-public class GildedRose
+public class GildedRose(IList<Item> items)
 {
-    IList<Item> Items;
-    public GildedRose(IList<Item> Items)
-    {
-        this.Items = Items;
-    }
+    private readonly IList<Item> _items = items ?? throw new ArgumentNullException(nameof(items));
 
     public void UpdateQuality()
     {
-        foreach (Item item in Items)
+        foreach (Item item in _items)
         {
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
