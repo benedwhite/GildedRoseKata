@@ -1,0 +1,12 @@
+﻿namespace GildedRoseKata;
+
+public static class ItemUpdaterFactory
+{
+    public static IItemUpdater Create(Item item)
+        => item.Name switch
+        {
+            "Aged Brie" => new AgedBrieUpdater(item),
+            "Backstage passes to a TAFKAL80ETC concert" => new BackstagePassUpdater(item),
+            _ => new OtherItemUpdater(item)
+        };
+}

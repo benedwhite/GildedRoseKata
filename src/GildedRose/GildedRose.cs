@@ -8,35 +8,7 @@ public class GildedRose(IList<Item> items)
     {
         foreach (Item item in _items)
         {
-            switch (item.Name)
-            {
-                case "Aged Brie":
-                    UpdateAgedBrie(item);
-                    break;
-                case "Backstage passes to a TAFKAL80ETC concert":
-                    UpdateBackstagePass(item);
-                    break;
-                case "Sulfuras, Hand of Ragnaros":
-                    continue;
-                default:
-                    UpdateOtherItem(item);
-                    break;
-            }
+            ItemUpdaterFactory.Create(item).Update();
         }
-    }
-
-    private static void UpdateAgedBrie(Item item)
-    {
-        new AgedBrieUpdater(item).Update();
-    }
-
-    private static void UpdateBackstagePass(Item item)
-    {
-        new BackstagePassUpdater(item).Update();
-    }
-
-    private static void UpdateOtherItem(Item item)
-    {
-        new OtherItemUpdater(item).Update();
     }
 }
