@@ -8,19 +8,21 @@ public class BackstagePassUpdater(Item item) : IItemUpdater
         {
             item.Quality = 0;
         }
-        else if (item.Quality < 50)
+        else
         {
-            item.Quality++;
+            int qualityIncrease = 1;
 
-            if (item.SellIn <= 10 && item.Quality < 50)
+            if (item.SellIn <= 10)
             {
-                item.Quality++;
+                qualityIncrease++;
             }
 
-            if (item.SellIn <= 5 && item.Quality < 50)
+            if (item.SellIn <= 5)
             {
-                item.Quality++;
+                qualityIncrease++;
             }
+
+            item.Quality = Math.Min(item.Quality + qualityIncrease, 50);
         }
 
         item.SellIn--;
