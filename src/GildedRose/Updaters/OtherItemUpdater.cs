@@ -1,6 +1,4 @@
-﻿using GildedRoseKata;
-
-namespace GildedRoseKata.Updaters;
+﻿namespace GildedRoseKata.Updaters;
 
 public class OtherItemUpdater(Item item) : IItemUpdater
 {
