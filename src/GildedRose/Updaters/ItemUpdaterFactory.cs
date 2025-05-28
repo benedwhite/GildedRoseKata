@@ -1,6 +1,6 @@
 ﻿using GildedRoseKata;
 
-namespace GildedRose.Updaters;
+namespace GildedRoseKata.Updaters;
 
 public static class ItemUpdaterFactory
 {

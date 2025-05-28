@@ -1,4 +1,4 @@
-﻿using GildedRose.Updaters;
+﻿using GildedRoseKata.Updaters;
 
 namespace GildedRoseKata;
 
