@@ -1,6 +1,6 @@
 ﻿namespace GildedRoseKata;
 
-public class BackstagePassUpdater(Item item)
+public class BackstagePassUpdater(Item item) : IItemUpdater
 {
     public void Update()
     {

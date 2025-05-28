@@ -1,6 +1,6 @@
 ﻿namespace GildedRoseKata;
 
-public class AgedBrieUpdater(Item item)
+public class AgedBrieUpdater(Item item) : IItemUpdater
 {
     public void Update()
     {
