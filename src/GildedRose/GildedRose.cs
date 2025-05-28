@@ -27,57 +27,16 @@ public class GildedRose(IList<Item> items)
 
     private static void UpdateAgedBrie(Item item)
     {
-        if (item.SellIn <= 0 && item.Quality < 50)
-        {
-            item.Quality = item.Quality + 1;
-        }
-
-        if (item.Quality < 50)
-        {
-            item.Quality = item.Quality + 1;
-        }
-
-        item.SellIn = item.SellIn - 1;
+        new AgedBrieUpdater(item).Update();
     }
 
     private static void UpdateBackstagePass(Item item)
     {
-        if (item.Quality < 50)
-        {
-            item.Quality = item.Quality + 1;
-        }
-
-        if (item.SellIn < 11
-            && item.Quality < 50)
-        {
-            item.Quality = item.Quality + 1;
-        }
-
-        if (item.SellIn < 6 && item.Quality < 50)
-        {
-            item.Quality = item.Quality + 1;
-        }
-
-        if (item.SellIn <= 0)
-        {
-            item.Quality = item.Quality - item.Quality;
-        }
-
-        item.SellIn = item.SellIn - 1;
+        new BackstagePassUpdater(item).Update();
     }
 
     private static void UpdateOtherItem(Item item)
     {
-        if (item.Quality > 0)
-        {
-            item.Quality = item.Quality - 1;
-        }
-
-        item.SellIn = item.SellIn - 1;
-
-        if (item.SellIn < 0 && item.Quality > 0)
-        {
-            item.Quality = item.Quality - 1;
-        }
+        new OtherItemUpdater(item).Update();
     }
 }
