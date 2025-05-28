@@ -8,6 +8,7 @@ public static class ItemUpdaterFactory
             "Aged Brie" => new AgedBrieUpdater(item),
             "Backstage passes to a TAFKAL80ETC concert" => new BackstagePassUpdater(item),
             "Sulfuras, Hand of Ragnaros" => new SulfurasUpdater(),
+            "Conjured Mana Cake" => new ConjuredItemUpdater(item),
             _ => new OtherItemUpdater(item)
         };
 }
