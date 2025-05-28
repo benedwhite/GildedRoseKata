@@ -137,6 +137,7 @@ public class GildedRoseTest
     [InlineData(5, 20, 23)]
     [InlineData(1, 20, 23)]
     [InlineData(0, 0, 0)]
+    [InlineData(-1, 0, 0)]
     public void UpdateQuality_ShouldAdjustBackstagePassesQuality_BasedOnSellInValue(
         int sellIn, 
         int quality, 
