@@ -6,25 +6,24 @@ public class BackstagePassUpdater(Item item) : IItemUpdater
     {
         if (item.Quality < 50)
         {
-            item.Quality = item.Quality + 1;
+            item.Quality++;
         }
 
-        if (item.SellIn < 11
-            && item.Quality < 50)
+        if (item.SellIn < 11 && item.Quality < 50)
         {
-            item.Quality = item.Quality + 1;
+            item.Quality++;
         }
 
         if (item.SellIn < 6 && item.Quality < 50)
         {
-            item.Quality = item.Quality + 1;
+            item.Quality++;
         }
 
         if (item.SellIn <= 0)
         {
-            item.Quality = item.Quality - item.Quality;
+            item.Quality -= item.Quality;
         }
 
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
     }
 }

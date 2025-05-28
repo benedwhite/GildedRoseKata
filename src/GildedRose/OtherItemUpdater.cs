@@ -6,14 +6,14 @@ public class OtherItemUpdater(Item item) : IItemUpdater
     {
         if (item.Quality > 0)
         {
-            item.Quality = item.Quality - 1;
+            item.Quality--;
         }
 
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
 
         if (item.SellIn < 0 && item.Quality > 0)
         {
-            item.Quality = item.Quality - 1;
+            item.Quality--;
         }
     }
 }
