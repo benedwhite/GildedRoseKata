@@ -157,6 +157,28 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+    [Theory]
+    [InlineData(10, 20, 19)]
+    [InlineData(1, 20, 19)]
+    [InlineData(0, 20, 18)]
+    [InlineData(-1, 20, 18)]
+    [InlineData(-10, 20, 18)]
+    public void UpdateQuality_ShouldDecreaseQualityTwiceAsFast_ForConjuredItems(
+        int sellIn,
+        int quality,
+        int expectedQuality)
+    {
+        // Given a "Conjured" item with a provided sell in and quality value
+        Item item = CreateItem("Conjured Item", sellIn, quality);
+        GildedRose sut = CreateGuildedRose(item);
+
+        // When UpdateQuality is invoked
+        sut.UpdateQuality();
+
+        // Then the quality value decreases twice as fast when sell in is 0 or negative
+        Assert.Equal(expectedQuality, item.Quality);
+    }
+
     private static Item CreateItem(string name, int sellIn, int quality)
         => new() { Name = name, SellIn = sellIn, Quality = quality };
 
