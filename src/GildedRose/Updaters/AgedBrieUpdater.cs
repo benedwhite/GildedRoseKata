@@ -2,18 +2,20 @@
 
 public class AgedBrieUpdater(Item item) : IItemUpdater
 {
+    private readonly Item _item = item ?? throw new ArgumentNullException(nameof(item));
+
     public void Update()
     {
-        if (item.Quality < 50)
+        if (_item.Quality < 50)
         {
-            item.Quality++;
+            _item.Quality++;
 
-            if (item.SellIn <= 0)
+            if (_item.SellIn <= 0)
             {
-                item.Quality++;
+                _item.Quality++;
             }
         }
 
-        item.SellIn--;
+        _item.SellIn--;
     }
 }
