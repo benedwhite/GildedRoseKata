@@ -157,6 +157,9 @@ public class GildedRoseTest
         Assert.Equal(expectedQuality, item.Quality);
     }
 
+    /// <summary>
+    /// "Conjured" items degrade in Quality twice as fast as normal items
+    /// </summary>
     [Theory]
     [InlineData(10, 20, 19)]
     [InlineData(1, 20, 19)]
