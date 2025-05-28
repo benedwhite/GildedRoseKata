@@ -4,6 +4,11 @@ public class OtherItemUpdater(Item item) : IItemUpdater
 {
     public void Update()
     {
+        if (item.Name == "Sulfuras, Hand of Ragnaros")
+        {
+            return;
+        }
+
         if (item.Quality > 0)
         {
             item.Quality = item.Quality - 1;
