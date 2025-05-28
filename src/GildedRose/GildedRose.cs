@@ -56,15 +56,14 @@ public class GildedRose(IList<Item> items)
             }
 
             if (item.SellIn < 0
-                && item.Name != "Aged Brie"
                 && item.Name == "Backstage passes to a TAFKAL80ETC concert")
             {
                 item.Quality = item.Quality - item.Quality;
             }
 
             if (item.SellIn < 0
-                && item.Name == "Aged Brie"
-                && item.Quality < 50)
+                && item.Quality < 50
+                && item.Name == "Aged Brie")
             {
                 item.Quality = item.Quality + 1;
             }
