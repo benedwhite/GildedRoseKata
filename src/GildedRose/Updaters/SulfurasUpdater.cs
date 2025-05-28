@@ -1,4 +1,4 @@
-﻿namespace GildedRoseKata;
+﻿namespace GildedRose.Updaters;
 
 public class SulfurasUpdater : IItemUpdater
 {

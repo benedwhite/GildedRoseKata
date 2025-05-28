@@ -1,4 +1,6 @@
-﻿namespace GildedRoseKata;
+﻿using GildedRose.Updaters;
+
+namespace GildedRoseKata;
 
 public class GildedRose(IList<Item> items)
 {
