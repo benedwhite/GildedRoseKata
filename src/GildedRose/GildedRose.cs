@@ -17,22 +17,19 @@ public class GildedRose(IList<Item> items)
                     item.Quality = item.Quality - 1;
                 }
             }
-            else
+            else if (item.Quality < 50)
             {
-                if (item.Quality < 50)
+                item.Quality = item.Quality + 1;
+
+                if (item.Name == "Backstage passes to a TAFKAL80ETC concert"
+                    && item.SellIn < 11
+                    && item.Quality < 50)
                 {
                     item.Quality = item.Quality + 1;
 
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert"
-                        && item.SellIn < 11
-                        && item.Quality < 50)
+                    if (item.SellIn < 6)
                     {
                         item.Quality = item.Quality + 1;
-
-                        if (item.SellIn < 6)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
                     }
                 }
             }
@@ -59,12 +56,9 @@ public class GildedRose(IList<Item> items)
                         item.Quality = item.Quality - item.Quality;
                     }
                 }
-                else
+                else if (item.Quality < 50)
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-                    }
+                    item.Quality = item.Quality + 1;
                 }
             }
         }
