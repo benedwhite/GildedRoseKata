@@ -10,7 +10,7 @@ public class BackstagePassUpdater(Item item) : IItemUpdater
         {
             _item.Quality = 0;
         }
-        else if (item.Quality < 50)
+        else if (_item.Quality < 50)
         {
             _item.Quality++;
 
