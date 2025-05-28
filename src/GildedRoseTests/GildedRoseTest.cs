@@ -102,7 +102,7 @@ public class GildedRoseTest
         // When UpdateQuality is invoked and increases quality
         sut.UpdateQuality();
 
-        // Then the quality value is more than 50
+        // Then the quality value is not more than 50
         Assert.Equal(expectedQuality, item.Quality);
     }
 
