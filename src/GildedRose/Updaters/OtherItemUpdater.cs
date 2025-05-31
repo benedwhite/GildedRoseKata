@@ -4,7 +4,8 @@ namespace GildedRoseKata.Updaters;
 
 public class OtherItemUpdater(Item item, IItemValidator itemValidator) : IItemUpdater
 {
-    private readonly Item _item = item ?? throw new ArgumentNullException(nameof(item));
+    private readonly Item _item = item 
+        ?? throw new ArgumentNullException(nameof(item));
 
     private readonly IItemValidator _itemValidator = itemValidator
         ?? throw new ArgumentNullException(nameof(itemValidator));
