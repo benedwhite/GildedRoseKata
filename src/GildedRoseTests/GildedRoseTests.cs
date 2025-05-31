@@ -5,7 +5,7 @@ namespace GildedRoseTests;
 /// <summary>
 /// Acceptance tests for the Gilded Rose Kata.
 /// </summary>
-public class GildedRoseTest
+public class GildedRoseTests
 {
     /// <summary>
     /// At the end of each day our system lowers both values for every item
@@ -180,6 +180,12 @@ public class GildedRoseTest
 
         // Then the quality value decreases twice as fast when sell in is 0 or negative
         Assert.Equal(expectedQuality, item.Quality);
+    }
+
+    [Fact]
+    public void UpdateQuality_ShouldThrowArgumentNullException_WhenItemIsNull()
+    {
+        Assert.Throws<ArgumentNullException>(() => new GildedRose(null));
     }
 
     private static Item CreateItem(string name, int sellIn, int quality)
