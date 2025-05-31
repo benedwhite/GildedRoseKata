@@ -2,6 +2,7 @@
 using GildedRoseKata.Updaters;
 
 namespace GildedRoseTests.Updaters;
+
 public class AgedBrieUpdaterTests : GildedRoseTestBase
 {
     [Fact]
