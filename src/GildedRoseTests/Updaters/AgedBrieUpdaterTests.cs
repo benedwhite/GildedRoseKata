@@ -1,5 +1,6 @@
 ﻿using GildedRoseKata;
 using GildedRoseKata.Updaters;
+using GildedRoseKata.Validators;
 
 namespace GildedRoseTests.Updaters;
 
@@ -8,14 +9,22 @@ public class AgedBrieUpdaterTests : GildedRoseTestBase
     [Fact]
     public void Constructor_ShouldThrowArgumentNullException_WhenItemIsNull()
     {
-        Assert.Throws<ArgumentNullException>(() => new AgedBrieUpdater(null));
+        Assert.Throws<ArgumentNullException>(() => new AgedBrieUpdater(
+            null, new ItemQualityValidator(1)));
+    }
+
+    [Fact]
+    public void Constructor_ShouldThrowArgumentNullException_WhenItemValidatorIsNull()
+    {
+        Assert.Throws<ArgumentNullException>(() => new AgedBrieUpdater(
+            CreateItem("Test Item", 1, 1), null));
     }
 
     [Fact]
     public void Update_ShouldDecreaseSellIn_WhenCalled()
     {
         // Arrange
-        Item item = CreateItem("Aged Brie", sellIn: 20, quality: 20);
+        Item item = CreateItem(Constants.Items.AgedBrie, sellIn: 20, quality: 20);
         AgedBrieUpdater updater = CreateAgedBrieUpdater(item);
 
         // Act
@@ -34,7 +43,7 @@ public class AgedBrieUpdaterTests : GildedRoseTestBase
         int expectedQuality)
     {
         // Arrange
-        Item item = CreateItem("Aged Brie", sellIn: 1, quality);
+        Item item = CreateItem(Constants.Items.AgedBrie, sellIn: 1, quality);
         AgedBrieUpdater updater = CreateAgedBrieUpdater(item);
 
         // Act
@@ -54,7 +63,7 @@ public class AgedBrieUpdaterTests : GildedRoseTestBase
         int expectedQuality)
     {
         // Arrange
-        Item item = CreateItem("Aged Brie", sellIn: 0, quality);
+        Item item = CreateItem(Constants.Items.AgedBrie, sellIn: 0, quality);
         AgedBrieUpdater updater = CreateAgedBrieUpdater(item);
 
         // Act
@@ -64,5 +73,7 @@ public class AgedBrieUpdaterTests : GildedRoseTestBase
         Assert.Equal(expectedQuality, item.Quality);
     }
 
-    private static AgedBrieUpdater CreateAgedBrieUpdater(Item item) => new(item);
+    private static AgedBrieUpdater CreateAgedBrieUpdater(Item item) => new(
+        item, 
+        new ItemQualityValidator(item.Quality));
 }
