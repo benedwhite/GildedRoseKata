@@ -24,7 +24,9 @@ public class BackstagePassUpdater(Item item) : IItemUpdater
                 qualityIncrease++;
             }
 
-            _item.Quality = Math.Min(_item.Quality + qualityIncrease, 50);
+            _item.Quality = Math.Min(
+                _item.Quality + qualityIncrease, 
+                Constants.MaxQuality);
         }
 
         _item.SellIn--;

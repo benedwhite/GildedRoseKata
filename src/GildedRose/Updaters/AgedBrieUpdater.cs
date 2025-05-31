@@ -6,11 +6,12 @@ public class AgedBrieUpdater(Item item) : IItemUpdater
 
     public void Update()
     {
-        if (_item.Quality < 50)
+        if (_item.Quality < Constants.MaxQuality)
         {
             _item.Quality++;
 
-            if (_item.SellIn <= 0)
+            if (_item.SellIn <= 0 
+                && _item.Quality < Constants.MaxQuality)
             {
                 _item.Quality++;
             }
