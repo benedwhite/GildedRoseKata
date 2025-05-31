@@ -7,6 +7,8 @@ namespace GildedRoseTests;
 /// </summary>
 public class GildedRoseTests : GildedRoseTestBase
 {
+    const string TestItemName = "Test Item";
+
     /// <summary>
     /// At the end of each day our system lowers both values for every item
     /// </summary>
@@ -14,7 +16,7 @@ public class GildedRoseTests : GildedRoseTestBase
     public void UpdateQuality_ShouldDecreaseSellInAndQualityByOne_GivenNormalItem()
     {
         // Given the item has a sell in value of 10 and a quality value of 20
-        Item item = CreateItem("Test Item", 10, quality: 20);
+        Item item = CreateItem(TestItemName, 10, quality: 20);
         GildedRose sut = CreateGuildedRose(item);
         int expectedSellIn = 9;
         int expectedQuality = 19;
@@ -36,7 +38,7 @@ public class GildedRoseTests : GildedRoseTestBase
     public void UpdateQuality_ShouldDecreaseQualityByTwo_GivenAnItemWithZeroOrNegativeSellIn(int sellIn)
     {
         // Given the item sell by date has passed (0 or negative)
-        Item item = CreateItem("Test Item", sellIn, quality: 20);
+        Item item = CreateItem(TestItemName, sellIn, quality: 20);
         GildedRose sut = CreateGuildedRose(item);
         int expectedQuality = 18;
 
@@ -57,7 +59,7 @@ public class GildedRoseTests : GildedRoseTestBase
     public void UpdateQuality_ShouldNotDecreaseQualityToNegative_GivenAnItemWithOneOrZeroQuality(int quality)
     {
         // Given the item has a quality value of 0 or 1
-        Item item = CreateItem("Test", sellIn: 10, quality);
+        Item item = CreateItem(TestItemName, sellIn: 10, quality);
         GildedRose sut = CreateGuildedRose(item);
         int expectedQuality = 0;
 
@@ -75,7 +77,7 @@ public class GildedRoseTests : GildedRoseTestBase
     public void UpdateQuality_ShouldIncreaseQualityByOne_GivenAnAgedBrieItem()
     {
         // Given the item is "Aged Brie" with a quality value of 1
-        Item item = CreateItem("Aged Brie", sellIn: 10, quality: 1);
+        Item item = CreateItem(Constants.Items.AgedBrie, sellIn: 10, quality: 1);
         GildedRose sut = CreateGuildedRose(item);
         int expectedQuality = 2;
 
@@ -95,7 +97,7 @@ public class GildedRoseTests : GildedRoseTestBase
     public void UpdateQuality_ShouldNotIncreaseQualityToBeyond50_GivenAnItemWithAQualityOf49Or50(int quality)
     {
         // Given the item has a quality value of 49 or 50
-        Item item = CreateItem("Aged Brie", sellIn: 10, quality);
+        Item item = CreateItem(Constants.Items.AgedBrie, sellIn: 10, quality);
         GildedRose sut = CreateGuildedRose(item);
         int expectedQuality = 50;
 
@@ -113,7 +115,7 @@ public class GildedRoseTests : GildedRoseTestBase
     public void UpdateQuality_ShouldNotIncreaseQuality_GivenAnItemThatIsSulfuras()
     {
         // Given a "Sulfuras" item with a quality value of 80
-        Item item = CreateItem("Sulfuras, Hand of Ragnaros", sellIn: 10, quality: 80);
+        Item item = CreateItem(Constants.Items.Sulfuras, sellIn: 10, quality: 80);
         GildedRose sut = CreateGuildedRose(item);
         int expectedQuality = 80;
 
@@ -145,7 +147,7 @@ public class GildedRoseTests : GildedRoseTestBase
     {
         // Given a "Backstage passes" item with a provided sell in value
         Item item = CreateItem(
-            "Backstage passes to a TAFKAL80ETC concert",
+            Constants.Items.BackstagePass,
             sellIn,
             quality);
         GildedRose sut = CreateGuildedRose(item);
@@ -172,7 +174,7 @@ public class GildedRoseTests : GildedRoseTestBase
         int expectedQuality)
     {
         // Given a "Conjured" item with a provided sell in and quality value
-        Item item = CreateItem("Conjured Item", sellIn, quality);
+        Item item = CreateItem(Constants.Items.Conjured, sellIn, quality);
         GildedRose sut = CreateGuildedRose(item);
 
         // When UpdateQuality is invoked
