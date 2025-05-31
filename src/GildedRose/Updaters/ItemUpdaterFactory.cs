@@ -1,4 +1,6 @@
-﻿namespace GildedRoseKata.Updaters;
+﻿using GildedRoseKata.Validators;
+
+namespace GildedRoseKata.Updaters;
 
 public static class ItemUpdaterFactory
 {
@@ -6,13 +8,15 @@ public static class ItemUpdaterFactory
     {
         ArgumentNullException.ThrowIfNull(item, nameof(item));
 
+        ItemQualityValidator itemQualityValidator = new(item.Quality);
+
         return item.Name switch
         {
-            "Aged Brie" => new AgedBrieUpdater(item),
-            "Backstage passes to a TAFKAL80ETC concert" => new BackstagePassUpdater(item),
-            "Sulfuras, Hand of Ragnaros" => new SulfurasUpdater(),
-            "Conjured Mana Cake" => new ConjuredItemUpdater(item),
-            _ => new OtherItemUpdater(item)
+            Constants.Items.AgedBrie => new AgedBrieUpdater(item, itemQualityValidator),
+            Constants.Items.BackstagePass => new BackstagePassUpdater(item, itemQualityValidator),
+            Constants.Items.Sulfuras => new SulfurasUpdater(),
+            Constants.Items.Conjured => new ConjuredItemUpdater(item, itemQualityValidator),
+            _ => new OtherItemUpdater(item, itemQualityValidator)
         };
     }
 }
