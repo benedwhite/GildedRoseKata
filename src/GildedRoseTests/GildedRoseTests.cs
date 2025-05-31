@@ -5,7 +5,7 @@ namespace GildedRoseTests;
 /// <summary>
 /// Acceptance tests for the Gilded Rose Kata.
 /// </summary>
-public class GildedRoseTests
+public class GildedRoseTests : GildedRoseTestBase
 {
     /// <summary>
     /// At the end of each day our system lowers both values for every item
@@ -187,9 +187,6 @@ public class GildedRoseTests
     {
         Assert.Throws<ArgumentNullException>(() => new GildedRose(null));
     }
-
-    private static Item CreateItem(string name, int sellIn, int quality)
-        => new() { Name = name, SellIn = sellIn, Quality = quality };
 
     private static GildedRose CreateGuildedRose(Item item) => new([item]);
 }
