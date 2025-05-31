@@ -2,18 +2,20 @@
 
 public class OtherItemUpdater(Item item) : IItemUpdater
 {
+    private readonly Item _item = item ?? throw new ArgumentNullException(nameof(item));
+
     public void Update()
     {
-        if (item.Quality > 0)
+        if (_item.Quality > 0)
         {
-            item.Quality--;
+            _item.Quality--;
         }
 
-        item.SellIn--;
+        _item.SellIn--;
 
-        if (item.SellIn < 0 && item.Quality > 0)
+        if (_item.SellIn < 0 && _item.Quality > 0)
         {
-            item.Quality--;
+            _item.Quality--;
         }
     }
 }

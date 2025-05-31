@@ -2,12 +2,14 @@
 
 public class ConjuredItemUpdater(Item item) : IItemUpdater
 {
+    private readonly Item _item = item ?? throw new ArgumentNullException(nameof(item));
+
     public void Update()
     {
-        item.SellIn--;
+        _item.SellIn--;
 
-        int degradation = item.SellIn < 0 ? 2 : 1;
+        int degradation = _item.SellIn < 0 ? 2 : 1;
 
-        item.Quality = Math.Max(0, item.Quality - degradation);
+        _item.Quality = Math.Max(0, _item.Quality - degradation);
     }
 }

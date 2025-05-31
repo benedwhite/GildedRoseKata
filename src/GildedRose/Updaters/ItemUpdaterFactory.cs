@@ -3,7 +3,10 @@
 public static class ItemUpdaterFactory
 {
     public static IItemUpdater Create(Item item)
-        => item.Name switch
+    {
+        ArgumentNullException.ThrowIfNull(item, nameof(item));
+
+        return item.Name switch
         {
             "Aged Brie" => new AgedBrieUpdater(item),
             "Backstage passes to a TAFKAL80ETC concert" => new BackstagePassUpdater(item),
@@ -11,4 +14,5 @@ public static class ItemUpdaterFactory
             "Conjured Mana Cake" => new ConjuredItemUpdater(item),
             _ => new OtherItemUpdater(item)
         };
+    }
 }

@@ -2,29 +2,31 @@
 
 public class BackstagePassUpdater(Item item) : IItemUpdater
 {
+    private readonly Item _item = item ?? throw new ArgumentNullException(nameof(item));
+
     public void Update()
     {
-        if (item.SellIn <= 0)
+        if (_item.SellIn <= 0)
         {
-            item.Quality = 0;
+            _item.Quality = 0;
         }
         else
         {
             int qualityIncrease = 1;
 
-            if (item.SellIn <= 10)
+            if (_item.SellIn <= 10)
             {
                 qualityIncrease++;
             }
 
-            if (item.SellIn <= 5)
+            if (_item.SellIn <= 5)
             {
                 qualityIncrease++;
             }
 
-            item.Quality = Math.Min(item.Quality + qualityIncrease, 50);
+            _item.Quality = Math.Min(_item.Quality + qualityIncrease, 50);
         }
 
-        item.SellIn--;
+        _item.SellIn--;
     }
 }
