@@ -183,7 +183,7 @@ public class GildedRoseTests
     }
 
     [Fact]
-    public void UpdateQuality_ShouldThrowArgumentNullException_WhenItemIsNull()
+    public void Constructor_ShouldThrowArgumentNullException_WhenItemIsNull()
     {
         Assert.Throws<ArgumentNullException>(() => new GildedRose(null));
     }
